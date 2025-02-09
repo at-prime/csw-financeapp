@@ -21,7 +21,6 @@ function App() {
       <CssBaseline />
       <Box className="App">
         <StockPriceBar />
-        {/* Add other components here */}
       </Box>
     </ThemeProvider>
   );
