@@ -17,7 +17,10 @@ app.use(express.json());
 app.use('/api/screener', stockRoutes);
 
 // WebSocket server for real-time stock updates
-const wss = new WebSocket.Server({ port: 5001 });
+const wss = new WebSocket.Server({ 
+  port: process.env.WS_PORT || 5001,
+  host: '0.0.0.0'  // Listen on all network interfaces
+});
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
@@ -40,7 +43,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Start server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Screener service running on port ${port}`);
 });
 
